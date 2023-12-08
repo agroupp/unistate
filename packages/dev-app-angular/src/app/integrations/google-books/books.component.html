@@ -1,0 +1,38 @@
+<section class="section seacrh-section">
+  <div class="search-wrapper">
+    <select name="fields" [formControl]="queryFieldsSelectorCtrl">
+      @for (item of queryFieldsSelector; track $index) {
+        <option [value]="item.value">{{ item.text }}</option>
+      }
+    </select>
+    <input type="text" name="q" [formControl]="queryCtrl" />
+  </div>
+</section>
+@if ($books().length) {
+  <section class="section content-section">
+    <div class="bulk-ops">
+      <div class="spacer"></div>
+      <div class="paginator">Paginator</div>
+    </div>
+    <table class="books-table">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Title</th>
+          <th>Authors</th>
+          <th>Categories</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (item of $books(); track item.id) {
+          <tr>
+            <td>{{ item.id }}</td>
+            <td>{{ item.title }}</td>
+            <td>{{ item.authors.join(',') }}</td>
+            <td>{{ item.categories.join(',') }}</td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  </section>
+}

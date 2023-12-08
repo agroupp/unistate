@@ -1,0 +1,129 @@
+{
+  "root": true,
+  "ignorePatterns": ["**/*"],
+  "plugins": ["@nx", "@typescript-eslint", "prettier", "import"],
+  "extends": [
+    "plugin:@typescript-eslint/recommended",
+    "plugin:prettier/recommended",
+    "plugin:@nx/angular"
+  ],
+  "overrides": [
+    {
+      "files": ["*.ts", "*.tsx", "*.js", "*.jsx"],
+      "rules": {
+        "@nx/enforce-module-boundaries": [
+          "error",
+          {
+            "enforceBuildableLibDependency": true,
+            "allow": [],
+            "depConstraints": [
+              {
+                "sourceTag": "*",
+                "onlyDependOnLibsWithTags": ["*"]
+              }
+            ]
+          }
+        ],
+        "prettier/prettier": [
+          "error",
+          {
+            "singleQuote": true,
+            "trailingComma": "all",
+            "arrowParens": "avoid",
+            "printWidth": 140,
+            "tabWidth": 2,
+            "eslintIntegration": true,
+            "bracketSpacing": true,
+            "arrow-body-style": "off",
+            "prefer-arrow-callback": "off"
+          }
+        ],
+        "import/order": [
+          "error",
+          {
+            "alphabetize": {
+              "order": "asc",
+              "caseInsensitive": true
+            },
+            "groups": [["builtin", "external"]],
+            "newlines-between": "always"
+          }
+        ]
+      }
+    },
+    {
+      "files": ["*.ts", "*.tsx"],
+      "extends": ["plugin:@nx/typescript"],
+      "rules": {
+        "@typescript-eslint/explicit-function-return-type": [
+          "error",
+          {
+            "allowExpressions": true,
+            "allowTypedFunctionExpressions": true,
+            "allowConciseArrowFunctionExpressionsStartingWithVoid": true,
+            "allowHigherOrderFunctions": false
+          }
+        ],
+        "@typescript-eslint/member-ordering": [
+          "warn",
+          {
+            "default": {
+              "memberTypes": [
+                "private-field",
+                "protected-field",
+                "decorated-field",
+                "public-field"
+              ]
+            }
+          }
+        ],
+        "@typescript-eslint/naming-convention": [
+          "error",
+          {
+            "selector": "interface",
+            "format": ["PascalCase"],
+            "custom": {
+              "regex": "^I[A-Z]",
+              "match": false
+            }
+          },
+          {
+            "selector": "class",
+            "format": ["PascalCase"]
+          },
+          {
+            "selector": "enum",
+            "format": ["PascalCase"]
+          },
+          {
+            "selector": "variable",
+            "format": ["camelCase", "UPPER_CASE"],
+            "leadingUnderscore": "allow"
+          },
+          {
+            "selector": "method",
+            "format": ["camelCase"],
+            "leadingUnderscore": "allow"
+          }
+        ],
+        "@typescript-eslint/no-shadow": ["warn"]
+      }
+    },
+    {
+      "files": ["*.js", "*.jsx"],
+      "extends": ["plugin:@nx/javascript"],
+      "rules": {}
+    },
+    {
+      "files": ["*.spec.ts", "*.spec.tsx", "*.spec.js", "*.spec.jsx"],
+      "env": {
+        "jest": true
+      },
+      "rules": {}
+    },
+    {
+      "files": ["*.scss", "*.html"],
+      "extends": ["plugin:@nx/angular-template"]
+    }
+  ]
+}
