@@ -1,0 +1,53 @@
+<div class="counters">
+  <div class="counter">
+    <button (click)="updateCounter('A', '+')">+</button>
+    <uni-counter-wrapper counterName="A" />
+    <button (click)="updateCounter('A', '-')">-</button>
+  </div>
+  <div class="counter">
+    <button (click)="updateCounter('B', '+')">+</button>
+    <uni-counter-wrapper counterName="B" />
+    <button (click)="updateCounter('B', '-')">-</button>
+  </div>
+  <div class="counter">
+    <button (click)="updateCounter('C', '+')">+</button>
+    <uni-counter-wrapper counterName="C" />
+    <button (click)="updateCounter('C', '-')">-</button>
+  </div>
+</div>
+<div class="connect-wrapper">
+  <div class="connect">
+    <h4>Signal</h4>
+    <button (click)="toggleConnectToStore()">
+      {{ storeConnection ? 'Disconnect' : 'Connect' }}
+    </button>
+    <div class="input-wrapper">
+      <input
+        #searchInput
+        type="text"
+        placeholder="Start typing the captain's name..."
+        name="search"
+        (keyup)="signalConnectQuery(searchInput.value)"
+      />
+    </div>
+  </div>
+  <div class="connect">
+    <h4>RxJs</h4>
+    <button (click)="toggleRxConnectToStore()">
+      {{ storeConnectionRx ? 'Disconnect' : 'Connect' }}
+    </button>
+    <div class="input-wrapper">
+      <input
+        type="text"
+        placeholder="Start typing the captain's name..."
+        name="search"
+        [formControl]="rxConnectQuery"
+      />
+    </div>
+  </div>
+</div>
+<div class="list">
+  @for (item of $captainsList(); track $index) {
+    <p>{{ item }}</p>
+  }
+</div>

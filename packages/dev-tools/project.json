@@ -1,0 +1,43 @@
+{
+  "name": "dev-tools",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "packages/dev-tools/src",
+  "projectType": "library",
+  "targets": {
+    "build": {
+      "executor": "@nx/rollup:rollup",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/packages/dev-tools",
+        "main": "packages/dev-tools/src/index.ts",
+        "tsConfig": "packages/dev-tools/tsconfig.lib.json",
+        "assets": [],
+        "project": "packages/dev-tools/package.json",
+        "compiler": "swc",
+        "format": ["cjs", "esm"]
+      }
+    },
+    "publish": {
+      "command": "node tools/scripts/publish.mjs dev-tools {args.ver} {args.tag}",
+      "dependsOn": ["build"]
+    },
+    "lint": {
+      "executor": "@nx/eslint:lint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": [
+          "packages/dev-tools/**/*.ts",
+          "packages/dev-tools/package.json"
+        ]
+      }
+    },
+    "test": {
+      "executor": "@nx/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+      "options": {
+        "jestConfig": "packages/dev-tools/jest.config.ts"
+      }
+    }
+  },
+  "tags": []
+}

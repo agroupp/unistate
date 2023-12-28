@@ -1,0 +1,9 @@
+{
+  "name": "@unistate/dev-tools",
+  "version": "0.0.1",
+  "dependencies": {
+    "@unistate/core": "*"
+  },
+  "main": "./index.cjs",
+  "module": "./index.js"
+}

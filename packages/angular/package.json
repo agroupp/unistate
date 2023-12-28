@@ -1,0 +1,12 @@
+{
+  "name": "@unistate/angular",
+  "version": "0.0.1",
+  "peerDependencies": {
+    "@angular/core": "^17.0.0",
+    "rxjs": "~7.8.0",
+    "@unistate/core": "*",
+    "jest-preset-angular": "~13.1.4"
+  },
+  "dependencies": {},
+  "sideEffects": false
+}

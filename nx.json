@@ -1,4 +1,15 @@
 {
+  "pluginsConfig": {
+    "@nx/js": {
+      "analyzeSourceFiles": true
+    },
+    "@nx/angular": {
+      "analyzeSourceFiles": true
+    },
+    "@nx/web": {
+      "analyzeSourceFiles": true
+    }
+  },
   "extends": "nx/presets/npm.json",
   "$schema": "./node_modules/nx/schemas/nx-schema.json",
   "affected": {
@@ -77,17 +88,6 @@
       "linter": "eslint",
       "unitTestRunner": "vitest",
       "e2eTestRunner": "none"
-    }
-  },
-  "pluginsConfig": {
-    "@nx/js": {
-      "analyzeSourceFiles": true
-    },
-    "@nx/angular": {
-      "analyzeSourceFiles": true
-    },
-    "@nx/web": {
-      "analyzeSourceFiles": true
     }
   }
 }

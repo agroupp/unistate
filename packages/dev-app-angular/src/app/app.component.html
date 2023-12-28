@@ -1,1 +1,14 @@
-<router-outlet></router-outlet>
+<aside class="menu-bar">
+  <a class="item" routerLink="/basic" routerLinkActive="active">
+    <span>Basic</span>
+  </a>
+  <a class="item" routerLink="/multi-featured" routerLinkActive="active">
+    <span>Multi-Featured</span>
+  </a>
+  <a class="item" routerLink="/integrations" routerLinkActive="active">
+    <span>Integrations</span>
+  </a>
+</aside>
+<div class="content">
+  <router-outlet></router-outlet>
+</div>

@@ -106,7 +106,13 @@
             "leadingUnderscore": "allow"
           }
         ],
-        "@typescript-eslint/no-shadow": ["warn"]
+        "@typescript-eslint/no-shadow": ["warn"],
+        "@typescript-eslint/no-unused-vars": [
+          "error",
+          {
+            "varsIgnorePattern": "^_"
+          }
+        ]
       }
     },
     {
