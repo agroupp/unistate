@@ -8,12 +8,24 @@ declare global {
   }
 }
 
+/**
+ * Logs a trace message to the console.
+ *
+ * @param message - The message to log.
+ * @returns void
+ */
 function logTrace(message: string): void {
   console.groupCollapsed(message);
   console.trace();
   console.groupEnd();
 }
 
+/**
+ * Represents a DevTools instance for interacting with Redux DevTools extension.
+ *
+ * @constructor
+ * @param {ReduxDevtoolsExtensionConfig} [config] - The configuration options for the Redux DevTools extension.
+ */
 export class DevTools {
   private readonly reduxDevtoolsExtension?: ReduxDevtoolsExtension;
   private readonly reduxDevtools?: ReduxDevtools;
@@ -34,10 +46,22 @@ export class DevTools {
     this.subscribeToRegistry();
   }
 
+  /**
+   * Sends a ReduxDevtoolsAction to the Redux Devtools extension.
+   *
+   * @param action - The ReduxDevtoolsAction to send.
+   * @returns void
+   */
   send(action: ReduxDevtoolsAction): void {
     this.reduxDevtools?.send(action, this.registry.getSnapshot());
   }
 
+  /**
+   * Adds a store to the DevTools instance.
+   *
+   * @param store - The store to add.
+   * @returns void
+   */
   addStore(store: Store<unknown>): void {
     this.subscriptions.set(
       `${store.uid} - update`,
@@ -55,6 +79,12 @@ export class DevTools {
     this.send(`[${store.name}] - @Init`);
   }
 
+  /**
+   * Removes a store from the DevTools instance.
+   *
+   * @param store - The store to remove.
+   * @returns void
+   */
   removeStore(store: Store<unknown>): void {
     const { uid, name } = store;
     const subscriptionKeys = Array.from(this.subscriptions.keys()).filter(key => key.includes(uid));
@@ -66,6 +96,12 @@ export class DevTools {
     this.send(`[${name}] - @Remove`);
   }
 
+  /**
+   * Subscribes to the Redux Devtools extension and initializes it with the current snapshot of the registry.
+   *
+   * @private
+   * @returns void
+   */
   private subscribeToReduxDevTools(): void {
     this.reduxDevtools?.subscribe(message => {
       if (message.type === 'START') {
@@ -76,6 +112,12 @@ export class DevTools {
     });
   }
 
+  /**
+   * Subscribes to the registry and performs actions based on the given action and store.
+   *
+   * @private
+   * @returns void
+   */
   private subscribeToRegistry(): void {
     this.registry.on(({ action, store }) => {
       if (!store) {
@@ -94,6 +136,11 @@ export class DevTools {
   }
 }
 
+/**
+ * Initializes the DevTools instance.
+ *
+ * @returns {DevTools} The initialized DevTools instance.
+ */
 export function initDevTools(): DevTools {
   return new DevTools();
 }

@@ -1,7 +1,7 @@
-import { devTools } from './dev-tools';
+import { initDevTools } from './dev-tools';
 
 describe('devTools', () => {
   it('should work', () => {
-    expect(devTools()).toEqual('dev-tools');
+    expect(initDevTools()).toBeTruthy();
   });
 });

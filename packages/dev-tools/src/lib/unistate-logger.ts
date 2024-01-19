@@ -11,6 +11,28 @@ const STYLES: Styles = {
   WARN: ['color: #ffeb3b'].join(';'),
 };
 
+/**
+ * Represents a logger for UniState.
+ *
+ * This logger is used to log messages and events related to UniState.
+ * It provides methods for logging different levels of messages and subscribing to the UniRegistry.
+ *
+ * @constructor
+ * Creates a new instance of UniStateLogger.
+ *
+ * @method log
+ * Logs a message with the specified level.
+ *
+ * @param level - The level of the message to be logged.
+ * @param message - The message to be logged.
+ *
+ * @method subscribeToRegistry
+ * Subscribes to the UniRegistry and logs events related to store actions.
+ *
+ * @private
+ * @property registry - The UniRegistry instance.
+ * @property subscriptions - A map of store subscriptions.
+ */
 export class UniStateLogger {
   private readonly registry = getUniRegistry();
   private readonly subscriptions = new Map<string, VoidFn>();
@@ -20,6 +42,13 @@ export class UniStateLogger {
     this.subscribeToRegistry();
   }
 
+  /**
+   * Logs a message with the specified log level.
+   *
+   * @param level - The log level.
+   * @param message - The message to be logged.
+   * @returns void
+   */
   log(level: UniLogLevel, message: string): void {
     const m = `%c[UniStateLogger]: %c${level}: %c${message}`;
     console.log(
@@ -30,6 +59,11 @@ export class UniStateLogger {
     );
   }
 
+  /**
+   * Subscribes to the UniRegistry and logs information based on the action performed.
+   *
+   * @returns void
+   */
   private subscribeToRegistry(): void {
     this.registry.on(({ action, store }) => {
       switch (action) {
@@ -53,6 +87,11 @@ export class UniStateLogger {
   }
 }
 
+/**
+ * Creates and returns an instance of UniStateLogger.
+ *
+ * @returns {UniStateLogger} - The UniStateLogger instance.
+ */
 export function runUniStateLogger(): UniStateLogger {
   return new UniStateLogger();
 }
